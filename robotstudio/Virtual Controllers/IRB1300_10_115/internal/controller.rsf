@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProductSettings version="2.0">
+  <Products>
+    <Product name="RobotControl" version="7.1.0+302" id="abb.robotics.robotcontrol">
+      <Features>
+        <Feature id="abb.robotics.robotcontrol.base" displayName="RobotControl Base" robot="1" />
+        <Feature id="abb.robotics.robotcontrol.languages.english" displayName="English" robot="1" />
+        <Feature id="abb.robotics.robotcontrol.options.flexpendant.limited" displayName="3120-1 FlexPendant Limited App Package" robot="1" />
+        <Feature id="abb.robotics.robotcontrol.options.flexpendant.essential" displayName="3120-2 FlexPendant Essential App Package" robot="1" />
+        <Feature id="abb.robotics.robotcontrol.options.flexpendant.program" displayName="3151-1 FlexPendant Program Package" robot="1" />
+        <Feature id="abb.robotics.robotcontrol.drivesystems.drive.dc430a6.du430a6.dm430a2" displayName="Drive System IRB Small Robots" robot="1" />
+        <Feature id="abb.robotics.robotcontrol.options.calaxis" displayName="Axis Calibration" robot="1" />
+      </Features>
+    </Product>
+    <Product name="RobotOS" version="2.0.0+195" id="abb.robotics.robotos">
+      <Features>
+        <Feature id="abb.robotics.robotos" displayName="Robot Controller Operating System" robot="1" />
+      </Features>
+    </Product>
+    <Product name="Robots" version="1.1.0+318" id="abb.robotics.robots">
+      <Features>
+        <Feature id="abb.robotics.robots.robots.irb1300.10-1_15" displayName="IRB 1300-10/1.15" robot="1" />
+      </Features>
+    </Product>
+  </Products>
+</ProductSettings>
