@@ -41,6 +41,10 @@ key.id
 *.pem
 internal/env*
 *.flash
+internal/opt_l0.cmd
+internal/option.cmd
+internal/option_registry.xml
+sc_cfg_list.xml
 
 ## EXPERIOR
 *.BACKUP
