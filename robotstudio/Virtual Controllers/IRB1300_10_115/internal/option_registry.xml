@@ -1,3 +1,5 @@
 <?xml version = "1.0" encoding="utf-8" ?>
 <option_registry xmlns="urn:abb-robotics-registry-option">
+<entry option="ROBOTS" path="C:/Users/tmp/AppData/Local/ABB/RobotWare/Robots_1.1.0"/>
+<entry option="gtpuSDK" path="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/options/gtpusdk"/>
 </option_registry>

@@ -1,0 +1,20 @@
+<?xml version = "1.0" encoding="utf-8" ?>
+<cfgrules_registry xmlns="urn:abb-robotics-registry-cfg-rules">
+<entry domain="EIO" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/rules/cfg/" postpath="cir_eio_cfgrules.xml"/>
+<entry domain="MOC" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/rules/cfg/" postpath="moc_cfgrules.xml"/>
+<entry domain="EIO" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/rules/cfg/" postpath="eio_cfgrules.xml"/>
+<entry domain="SIO" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/rules/cfg/" postpath="sio_cfgrules.xml"/>
+<entry domain="SIO" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/rules/cfg/" postpath="sio_net_cfgrules.xml"/>
+<entry domain="SIO" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/rules/cfg/" postpath="sio_firewall_mgr_cfgrules.xml"/>
+<entry domain="SIO" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/rules/cfg/" postpath="sio_syslog_cfgrules.xml"/>
+<entry domain="SYS" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/rules/cfg/" postpath="cir_sys_cfgrules.xml"/>
+<entry domain="SYS" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/rules/cfg/" postpath="sys_fan_control_cfgrules.xml"/>
+<entry domain="DBG" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/rules/cfg/" postpath="dbg_cfgrules.xml"/>
+<entry domain="MMC" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/rules/cfg/" postpath="cir_mmc_cfgrules.xml"/>
+<entry domain="SYS" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/rules/cfg/" postpath="vc_cfgrules.xml"/>
+<entry domain="SYS" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/rules/cfg/" postpath="cir_sys_st_cfgrules.xml"/>
+<entry domain="EIO" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/options/enms" postpath="/en_base_cfgrules.xml"/>
+<entry domain="SIO" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/options/cse/" postpath="cse_cfgrules.xml"/>
+<entry domain="SIO" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/options/csgw/" postpath="csgw_cfgrules.xml"/>
+<entry domain="SYS" prepath="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0/options/sc" postpath="/runchn_cfgrules.xml"/>
+</cfgrules_registry>

@@ -30,7 +30,15 @@ as/
 sem4plc.isopen
 
 ## ROBOT STUDIO
-
+StationBackups/
+Backups/
+BACKUP/
+TEMP/
+*.log
+*.bin
+key.id
+*.key
+*.pem
 
 ## EXPERIOR
 *.BACKUP
