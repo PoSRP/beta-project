@@ -44,7 +44,8 @@ Right-click on your *feature-branch*, select **Rebase feature-branch onto test**
 This recreates your *feature-branch* history with the latest test as the base. 
 Any merge conflicts **must** be handled here. 
 It is **always** a *Force Push*, that's just because it's a rebase instead of merge. 
-Finally checkout **test** and right-click on *feature-branch* and select **Fast-forward test to feature-branch**
+Finally checkout **test** and right-click on *feature-branch* and select **Fast-forward test to feature-branch**.  
+Remember to push the changes each time!  
 
 * Merging test into master
 We all agree to it, and merge **test** into **master**. Note this is not a rebase, 
