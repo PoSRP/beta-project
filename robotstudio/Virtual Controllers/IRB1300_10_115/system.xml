@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SystemProperties>
+  <SystemName>IRB1300_10_115</SystemName>
+  <SerialNo>VIRTUAL_CONTROLLER</SerialNo>
+  <UsedMedia>
+    <Media path="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotControl_7.1.0" name="RobotControl" version="7.1.0+302" versionName="7.1.0"/>
+    <Media path="C:/Users/tmp/AppData/Local/ABB/RobotWare/RobotOS_2.0.0" name="RobotOS" version="2.0.0+195" versionName="2.0.0"/>
+    <Media path="C:/Users/tmp/AppData/Local/ABB/RobotWare/Robots_1.1.0" name="Robots" version="1.1.0+318" versionName="1.1.0"/>
+  </UsedMedia>
+  <ControlModule>
+    <Option descr="RobotControl Base"/>
+    <Option descr="English"/>
+    <Option descr="3120-1 FlexPendant Limited App Package"/>
+    <Option descr="3120-2 FlexPendant Essential App Package"/>
+    <Option descr="3151-1 FlexPendant Program Package"/>
+  </ControlModule>
+  <DriveModule>
+    <Name>Robot1</Name>
+    <Option descr="Drive System IRB Small Robots"/>
+    <Option descr="Axis Calibration"/>
+  </DriveModule>
+  <AdditionalOption>
+    <Name>Robots</Name>
+    <Option descr="IRB 1300-10/1.15"/>
+  </AdditionalOption>
+</SystemProperties>
