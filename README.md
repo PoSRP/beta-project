@@ -7,7 +7,7 @@ To fix this, for now at least, seems to force it through command-line.
 Open a PowerShell promt as Admin, and navigate to the folder:  
 *\beta-project\automationstudio\Logical\*  
 Run the following line:  
-*rmdir -R -Force .\* *  
+`rmdir -R -Force .\*`  
 Pull what ever branch you tried to pull again.  
 
 ## Structure
