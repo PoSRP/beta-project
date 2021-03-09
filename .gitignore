@@ -39,6 +39,8 @@ TEMP/
 key.id
 *.key
 *.pem
+internal/env*
+*.flash
 
 ## EXPERIOR
 *.BACKUP
