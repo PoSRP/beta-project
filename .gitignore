@@ -23,10 +23,10 @@ codegen/
 octave-workspace
 
 ## AUTOMATION STUDIO
-Binaries
-Temp
-Diagnosis
-as
+Binaries/
+Temp/
+Diagnosis/
+as/
 sem4plc.isopen
 
 ## ROBOT STUDIO
