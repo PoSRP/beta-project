@@ -21,4 +21,4 @@ clear
 
 %% run simscape
 
-open_system('semPro4/Pend_cart');
+open_system('sim/Pend_cart');
