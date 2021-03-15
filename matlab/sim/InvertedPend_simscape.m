@@ -14,7 +14,8 @@ clear
 
 % mass
     m_c     = 0.5;       %[kg]
-    m_p     = 0.084;     %[kg]
+    m_p     = 0.082;     %[kg]
+    m_pp    = 0.002;     %[kg]
     
 % other forces
     g       = 9.82;      %[m/s^2]
