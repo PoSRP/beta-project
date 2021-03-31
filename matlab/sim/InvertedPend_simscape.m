@@ -2,7 +2,7 @@
 clear
 
 %% parameters of system
-
+    cycleTime = 0.01;    %[s]
 % Lengths
     l_p     = 0.35;      %[m]
     l_p_com = 0.1791;    %[m] pendulum center of mass
