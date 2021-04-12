@@ -1,8 +1,6 @@
-
 VAR
-
-END_VAR
-
-VAR CONSTANT
-
+	gAxis : ACP10AXIS_typ;			(* Required axis object *)
+	
+	gControl : gControlType;		(* Control related variables *)
+	hmi : hmiType;					(* HMI stuff *)
 END_VAR

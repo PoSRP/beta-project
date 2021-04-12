@@ -1,3 +1,7 @@
+<<<<<<< feature-srp-robotstudio-init
 <ScCfgList>
   <ScCfgFile>sc_cfg.xml</ScCfgFile>
 </ScCfgList>
+=======
+<ScCfgList>
+>>>>>>> feature-srp-automationstudio
