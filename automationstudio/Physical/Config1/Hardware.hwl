@@ -2,11 +2,44 @@
 <?AutomationStudio FileVersion="4.9"?>
 <BR.AS.HardwareTopology>
   <TimeStamps>
-    <TimeStamp LogicalPath="Config1.Hardware.hw" LastWriteTime="03/09/2021 00:59:58" />
+    <TimeStamp LogicalPath="Config1.Hardware.hw" LastWriteTime="04/11/2021 23:54:12" />
   </TimeStamps>
   <Modules>
     <Module Name="X20CP1586" Type="X20CP1586" X="100" Y="100" />
+    <Module Name="8EIxxxMxS1x.xxxx-1" Type="8EIxxxMxS1x.xxxx-1" X="147" Y="301" />
+    <Module Name="8EAC0122.001-1" Type="8EAC0122.001-1" X="149.8" Y="339.5" />
+    <Module Name="8JSA24.E8080D000-0" Type="8JSA24.E8080D000-0" X="303" Y="420" />
+    <Module Name="OpcUa_any" Type="OpcUa_any" X="250" Y="554" />
   </Modules>
-  <Links />
+  <Links>
+    <Link From="8EIxxxMxS1x.xxxx-1" To="X20CP1586" FromPort="PLK1" ToPort="IF3" IsRoutedByUser="False">
+      <Point X="156" Y="187" />
+      <Point X="156" Y="187" />
+      <Point X="156" Y="200" />
+      <Point X="155.600021" Y="200" />
+      <Point X="155.600021" Y="301" />
+      <Point X="155.600021" Y="312" />
+      <Point X="155.600021" Y="312" />
+    </Link>
+    <Link From="8EIxxxMxS1x.xxxx-1" To="8JSA24.E8080D000-0" FromPort="MT1" ToPort="MT" IsRoutedByUser="False">
+      <Point X="174.500031" Y="349.8" />
+      <Point X="174.500031" Y="349.8" />
+      <Point X="194.500031" Y="349.8" />
+      <Point X="352.5" Y="349.8" />
+      <Point X="352.5" Y="419.6" />
+      <Point X="352.5" Y="426.6" />
+      <Point X="352.5" Y="426.6" />
+    </Link>
+    <Link From="OpcUa_any" To="X20CP1586" FromPort="ETH1" ToPort="IF2" IsRoutedByUser="False">
+      <Point X="284" Y="598" />
+      <Point X="284" Y="598" />
+      <Point X="284" Y="605" />
+      <Point X="284" Y="615" />
+      <Point X="132" Y="615" />
+      <Point X="132" Y="200" />
+      <Point X="132" Y="187" />
+      <Point X="132" Y="187" />
+    </Link>
+  </Links>
   <InfoElements />
 </BR.AS.HardwareTopology>
