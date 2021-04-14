@@ -3,4 +3,7 @@ VAR
 	
 	gControl : gControlType;		(* Control related variables *)
 	hmi : hmiType;					(* HMI stuff *)
+	opcua_r : opcuaReadType;		(* Variables readable with OPCUA *)
+	opcua_w : opcuaWriteType;		(* Variables writeable with OPCUA *)
+	pvi : pviType;					(* Variables shared with PVI *)
 END_VAR
