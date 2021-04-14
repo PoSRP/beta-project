@@ -10,18 +10,13 @@
   <DefaultView>
     <Module Name="&lt;Default&gt;">
       <GlobalVariables Name="Global Variables">
-        <Variable Name="gControl">
-          <Variable Name="proportionalGain" />
-          <Variable Name="derivativeGain" />
-          <Variable Name="integralGain" />
-          <Variable Name="setPosition" />
-          <Variable Name="setDirection" />
-          <Variable Name="setVelocity" />
-          <Variable Name="currentPosition" />
-          <Variable Name="currentAngle" />
-          <Variable Name="currentVelocity" />
-          <Variable Name="pidEnabled" />
-          <Variable Name="modeVelocity" />
+        <Variable Name="opcua_r">
+          <Variable Name="cartPosition" />
+          <Variable Name="cartVelocity" />
+          <Variable Name="pendulumAngle" />
+        </Variable>
+        <Variable Name="opcua_w">
+          <Variable Name="setCartVelocity" />
         </Variable>
       </GlobalVariables>
     </Module>
