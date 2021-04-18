@@ -1,29 +1,48 @@
 
 TYPE
-	hmiType : STRUCT
-		overrides : hmiOverrideType;	(*  *)
-		fields : vFieldType;			(*  *)
-		indicators : vIndicatorType;	(*  *)
-		buttons : vButtonType;			(*  *)
-	END_STRUCT;	
+	ctrlStateEnum : 
+		(
+		CTRL_INIT,
+		CTRL_OFF,
+		CTRL_POWER_ON_AXIS,
+		CTRL_POWERING_ON_AXIS,
+		CTRL_POWER_OFF_AXIS,
+		CTRL_POWERING_OFF_AXIS,
+		CTRL_HOME_AXIS,
+		CTRL_HOMING_AXIS,
+		CTRL_STOPPING,
+		CTRL_STANDSTILL,
+		CTRL_MOVE_VELOCITY,
+		CTRL_MOVE_ABSOLUTE,
+		CTRL_ERROR,
+		CTRL_MOVE_VELOCITY_ERROR,
+		CTRL_MOVE_ABSOLUTE_ERROR,
+		CTRL_FATAL_ERROR,
+		CTRL_FATAL_ERROR_EXIT
+	);
 	
-	hmiOverrideType : STRUCT
-		acceleration : BOOL;			(*  *)
-		velocity : BOOL;				(*  *)
-		position : BOOL;				(*  *)
-		accelerationPrevState : BOOL;	(*  *)
-		velocityPrevState : BOOL;		(*  *)
-		positionPrevState : BOOL;		(*  *)
-		accelerationStored : REAL;		(*  *)
-		velocityStored : REAL;			(*  *)
-		positionStored : REAL;			(*  *)
+	mcBlocksType : STRUCT
+		power : MC_Power;
+		home : MC_Home;
+		stop : MC_Stop;
+		reset : MC_Reset;
+		moveVelocity : MC_MoveVelocity;
+		moveAbsolute : MC_MoveAbsolute;
+		currentPosition : MC_ReadActualPosition;
+		currentVelocity : MC_ReadActualVelocity;
+		status : MC_ReadStatus;
+		error : MC_ReadAxisError;
+	END_STRUCT;
+	
+	gLocalPID : STRUCT
+		enabled : BOOL;					(*  *)
+		proportionalGain : BOOL;		(*  *)
+		integralGain : BOOL;			(*  *)
+		derivativeGain : BOOL;			(*  *)
 	END_STRUCT;
 	
 	gControlType : STRUCT
-		pidEnabled : BOOL;				(*  *)
-		proportionalGain : REAL;		(*  *)
-		derivativeGain : REAL;			(*  *)
-		integralGain : REAL;			(*  *)
+		localPID : gLocalPID;			(*  *)
 		modeVelocity : BOOL;			(*  *)
 		setPosition : REAL;				(*  *)
 		setDirection : BOOL;			(*  *)
@@ -31,32 +50,46 @@ TYPE
 		currentPosition : REAL;			(*  *)
 		currentAngle : REAL;			(*  *)
 		currentVelocity : REAL;			(*  *)
+		currentDirection : INT;			(*  *)
 		limitAcceleration : REAL := 1000;	(*  *)
 		limitVelocity : REAL := 200;	(*  *)
 		limitPosPos : DINT := -5000;	(*  *)
 		limitNegPos : DINT := 5000;		(*  *)
 	END_STRUCT;
 	
+	hmiType : STRUCT
+		fields : vFieldType;			(*  *)
+		indicators : vIndicatorType;	(*  *)
+		buttons : vButtonType;			(*  *)
+	END_STRUCT;	
+	
 	vButtonType : STRUCT
 		on : BOOL;						(*  *)
+		onPrevious : BOOL;
 		off : BOOL;						(*  *)
+		offPrevious : BOOL;
 		start : BOOL;					(*  *)
+		startPrevious : BOOL;
 		stop : BOOL;					(*  *)
+		stopPrevious : BOOL;
+		localPid : BOOL;				(*  *)
+		localPidPrevious : BOOL;
+		simulinkPid : BOOL;				(*  *)
+		simulinkPidPrevious : BOOL;
+		externalSim : BOOL;				(*  *)
+		externalSimPrevious : BOOL;
+		simulinkSim : BOOL;				(*  *)
+		simulinkSimPrevious : BOOL;
 		ackError : BOOL;				(*  *)
-		moveTypeToggle : BOOL;			(*  *)
-		overrideVelocity : BOOL;		(*  *)
-		overrideVelocityDir : BOOL;		(*  *)
+		ackErrorPrevious : BOOL;
 		overridePosition : BOOL;		(*  *)
-		setLimits : BOOL;				(*  *)
-		setGearing : BOOL;				(*  *)
+		overridePositionPrevious : BOOL;
 	END_STRUCT;
 	
 	vFieldType : STRUCT
 		velocity : REAL;			(*  *)
 		position : REAL;			(*  *)
 		angle : REAL;				(*  *)
-		ovrAcceleration : REAL;		(*  *)
-		ovrVelocity : REAL;			(*  *)
 		ovrPosition : REAL;			(*  *)
 		accelerationLimit : REAL;	(*  *)
 		velocityLimit : REAL;		(*  *)
@@ -68,7 +101,6 @@ TYPE
 	END_STRUCT;
 	
 	vIndicatorType : STRUCT
-		modeMoveAbsolute : INT;		(*  *)
 		power : INT;				(*  *)
 		home : INT;					(*  *)
 		stop : INT;					(*  *)
@@ -83,12 +115,12 @@ TYPE
 		writeParam : INT;			(*  *)
 	END_STRUCT;
 	
-	opcuaReadType : STRUCT
+	opcuaWriteType : STRUCT 			(* For variables read from OPCUA *)
 		cartPosition : REAL := 0.0;		(* mm *)
 		cartVelocity : REAL := 0.0;		(* mm/s *)
 		pendulumAngle : REAL := 0.0;	(* Rad, 0 is upright position *)
 	END_STRUCT;
-	opcuaWriteType : STRUCT
+	opcuaReadType : STRUCT 				(* For variables written to OPCUA *)
 		setCartVelocity : REAL := 0.0;	(* Negative is backward motion *)
 	END_STRUCT;
 	

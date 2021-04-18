@@ -1,4 +1,3 @@
 VAR
-	state : ctrlStateEnum := CTRL_INIT;
-	mc : mcBlocksType;
+
 END_VAR
