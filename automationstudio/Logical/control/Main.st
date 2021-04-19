@@ -210,6 +210,8 @@ PROGRAM _CYCLIC
 	IF mc.status.Error THEN
 	END_IF
 	
+	pvi.pendulumAngle;
+	
 END_PROGRAM
 
 PROGRAM _EXIT
