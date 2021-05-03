@@ -1,44 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?AutomationStudio Version=4.9.2.46 FileVersion="4.9"?>
 <Hardware xmlns="http://br-automation.co.at/AS/Hardware">
-  <Module Name="8EAC0122.001-1" Type="8EAC0122.001-1" Version="2.2.0.0">
-    <Connection Connector="SS" TargetModule="8EIxxxMxS1x.xxxx-1" TargetConnector="SS1" />
-  </Module>
-  <Module Name="8EIxxxMxS1x.xxxx-1" Type="8EIxxxMxS1x.xxxx-1" Version="2.3.0.3">
-    <Connection Connector="PLK1" TargetModule="X20CP1586" TargetConnector="IF3" NodeNumber="1">
-      <Cable Type="PowerlinkCable" Length="10" Version="1.0.0.3" />
-    </Connection>
-    <Parameter ID="MotionTP" Value="Acp10Arnc0" />
-    <Parameter ID="BothEndSwitchesAreNormallyOpen_r1" Value="on" />
-    <Parameter ID="QuickStopIsNormallyOpen_r1" Value="on" />
-    <Parameter ID="Ax1Interface" Value="Ax1EnDat" />
-  </Module>
-  <Module Name="8JSA24.E8080D000-0" Type="8JSA24.E8080D000-0" Version="1.0.6.30">
-    <Connection Connector="MT" TargetModule="8EIxxxMxS1x.xxxx-1" TargetConnector="MT1" />
-  </Module>
-  <Module Name="OpcUa_any" Type="OpcUa_any" Version="1.0.0.1">
-    <Connection Connector="ETH1" TargetModule="X20CP1586" TargetConnector="IF2">
-      <Cable Type="PowerlinkCable" Length="10" Version="1.0.0.3" />
-    </Connection>
-    <Parameter ID="ServerEndpointUrl" Value="opc.tcp://localhost:4840" />
-  </Module>
   <Module Name="X20CP1586" Type="X20CP1586" Version="1.8.1.0">
     <Connector Name="IF2">
       <Parameter ID="ActivateDevice" Value="1" />
       <Group ID="Vnc1" />
       <Parameter ID="VncVcObjectName1" Value="Visu" />
       <Parameter ID="VncKeyMappingFile1" Value="VC\PS2-Keyboard.dis" />
-      <Parameter ID="VncRefreshRate1" Value="100" />
-      <Parameter ID="VncTitle1" Value="Beta Project" />
     </Connector>
-    <Parameter ID="ConfigurationID" Value="betaautomationstudio_Config1" />
+    <Parameter ID="ConfigurationID" Value="betaprojectAS_Config1" />
     <Parameter ID="Simulation" Value="1" />
-    <Parameter ID="TimerDeviceType" Value="EPLX2X" />
-    <Parameter ID="TimerDevice" Value="X20CP1586.IF3" />
-    <Parameter ID="TaskClassIdleTime" Value="2000" />
-    <Group ID="Route1" />
     <Parameter ID="ActivateOpcUa" Value="1" />
     <Parameter ID="OpcUa_AuthenticationSecurityPolicy_EnableNone" Value="1" />
+    <Parameter ID="OpcUa_SamplingTimer_Default" Value="1" />
     <Parameter ID="OpcUaInformationModels_PV_Version" Value="1" />
   </Module>
 </Hardware>

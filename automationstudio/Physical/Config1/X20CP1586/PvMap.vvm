@@ -1,3 +1,4 @@
+
 VAR_CONFIG
-	::pvi AT %Q.::pvi; (*PVI Variables, lol*)
+
 END_VAR

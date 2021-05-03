@@ -17,7 +17,6 @@
     <Object Type="Package">mappView</Object>
     <Object Type="Package">mappVision</Object>
     <Object Type="Package">mappCockpit</Object>
-    <Object Type="Package">Motion</Object>
     <Object Type="Package">VC</Object>
   </Objects>
   <Configuration ModuleId="X20CP1586">

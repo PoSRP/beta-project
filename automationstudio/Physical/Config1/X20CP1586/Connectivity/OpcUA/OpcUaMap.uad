@@ -9,16 +9,14 @@
   </Aliases>
   <DefaultView>
     <Module Name="&lt;Default&gt;">
-      <GlobalVariables Name="Global Variables">
-        <Variable Name="opcua_r">
-          <Variable Name="setCartVelocity" />
-        </Variable>
-        <Variable Name="opcua_w">
+      <Task Name="Program">
+        <Variable Name="opcua">
           <Variable Name="cartPosition" />
           <Variable Name="cartVelocity" />
           <Variable Name="pendulumAngle" />
+          <Variable Name="setCartVelocity" />
         </Variable>
-      </GlobalVariables>
+      </Task>
     </Module>
   </DefaultView>
 </OpcUaSource>

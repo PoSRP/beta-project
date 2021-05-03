@@ -117,8 +117,6 @@
     <Source File="Bitmaps\zuneListPadHor_released.bminfo"/>
     <Source File="Bitmaps\zuneListPadVer_pressed.bminfo"/>
     <Source File="Bitmaps\zuneNumPad_pressed.bminfo"/>
-    <Source File="Bitmaps\green_small_box.bminfo"/>
-    <Source File="Bitmaps\red_small_box.bminfo"/>
     <Source File="BitmapGroups\AlphaPadQVGA.bmgrp"/>
     <Source File="BitmapGroups\NumPad.bmgrp"/>
     <Source File="BitmapGroups\AlphaPad.bmgrp"/>
@@ -128,7 +126,6 @@
     <Source File="BitmapGroups\AcknowledgeState.bmgrp"/>
     <Source File="BitmapGroups\NavigationPad.bmgrp"/>
     <Source File="BitmapGroups\Borders.bmgrp"/>
-    <Source File="BitmapGroups\IndicatorGR.bmgrp"/>
     <Source File="Pages\Init_Page.page"/>
     <Source File="StyleSheets\Gray.vcs"/>
     <Source File="StyleSheets\Color.vcs"/>

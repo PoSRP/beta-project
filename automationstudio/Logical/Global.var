@@ -1,12 +1,8 @@
+
 VAR
-	gAxis : ACP10AXIS_typ;			(* Required axis object *)
-	
-	ctrlState : ctrlStateEnum := CTRL_INIT;	(* Control loop state *)
-	mc : mcBlocksType;				(* Function blocks for motor control *)
-	
-	gControl : gControlType;		(* Control related variables *)
-	hmi : hmiType;					(* HMI stuff *)
-	opcua_r : opcuaReadType;		(* Variables readable with OPCUA *)
-	opcua_w : opcuaWriteType;		(* Variables writeable with OPCUA *)
-	pvi : pviType;					(* Variables shared with PVI *)
+
+END_VAR
+
+VAR CONSTANT
+
 END_VAR

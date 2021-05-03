@@ -1,0 +1,7 @@
+VAR
+	control : controlType;
+	hmi : hmiType;
+	opcua : opcuaType;
+	pvi : pviType;
+	localPid : localPidType;
+END_VAR

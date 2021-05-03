@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<?AutomationStudio FileVersion="4.9"?>
-<NcMapping NcSwId="Acp10" DisabledNodesAreHidden="False">
-  <NcObject Name="gAxis" ModuleId="8EIxxxMxS1x.xxxx-1" Type="ncAXIS" Channel="1" AcoposSimulation="Standard" InitParameter="gAxisi" AcoposParameter="gAxisa" Disabled="FALSE" ModuleDisabled="FALSE" />
-  <NcObject Name="8EIxxxMxS1x.xxxx-1_ncV_AXIS1" ModuleId="8EIxxxMxS1x.xxxx-1" Type="ncV_AXIS" Channel="1" Disabled="TRUE" ModuleDisabled="FALSE" />
-</NcMapping>
