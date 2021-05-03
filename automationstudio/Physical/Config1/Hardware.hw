@@ -32,6 +32,7 @@
       <Parameter ID="VncTitle1" Value="Beta Project" />
     </Connector>
     <Parameter ID="ConfigurationID" Value="betaautomationstudio_Config1" />
+    <Parameter ID="Simulation" Value="1" />
     <Parameter ID="TimerDeviceType" Value="EPLX2X" />
     <Parameter ID="TimerDevice" Value="X20CP1586.IF3" />
     <Parameter ID="TaskClassIdleTime" Value="2000" />
