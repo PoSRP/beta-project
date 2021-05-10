@@ -217,7 +217,11 @@ PROGRAM _CYCLIC
 				ELSIF hmi.buttons.simulinkPid THEN
 					// Simulink has the calculated value for velocity
 					control.setVelocity := opcua.setCartVelocity;
-		
+					
+					// Update the opcua from current simulated reads
+					opcua.cartPosition := control.currentPosition;
+					opcua.cartVelocity := control.currentVelocity;
+					opcua.pendulumAngle := control.currentAngle;
 				ELSE
 					// No control is set
 					control.setVelocity := 0;
