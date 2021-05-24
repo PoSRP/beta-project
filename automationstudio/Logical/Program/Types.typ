@@ -54,26 +54,28 @@ TYPE
 		currentAngularVelocity : REAL;
 		currentDirection : BOOL;		(*  *)
 		limitAcceleration : REAL := 1000;	(*  *)
-		limitVelocity : REAL := 200;	(*  *)
+		limitVelocity : REAL := 20000;	(*  *)
 		limitPosPos : DINT := -5000;	(*  *)
 		limitNegPos : DINT := 5000;		(*  *)
 		homing : homingType;		(*  *)
 	END_STRUCT;
 	
 	localLqrType : STRUCT
-		A : ARRAY[1..4, 1..4] OF LREAL := 0, 0, 0, 0, 1, -10, 0, -55.8140, 0, 1.6498, 0, 64.0173, 0, -0.00134, 1, -0.5198;
+		A : ARRAY[1..4, 1..4] OF LREAL := 0, 1, 0, 0, 0, -10, 1.6498, -0.0134, 0, 0, 0, 1, 0, -55.8140, 64.0173, -0.5198;
 		B : ARRAY[1..4] OF LREAL := 0, 2, 0, 11.1628;
-		C : ARRAY[1..4, 1..2] OF LREAL := 1, 0, 0, 0, 0, 1, 0, 0;	
-		Kf : ARRAY[1..2, 1..4] OF LREAL := -1.0074, -0.0185, -0.1490, -1.0585, -0.1490, -1.3128, -14.9055, -110.5974;
+		Kf : ARRAY[1..4, 1..2] OF LREAL := -3.1768, -0.0803, -0.0491, -1.2372, -0.0803, -15.3344, -0.2485, -112.5752;
 		Klqr : ARRAY[1..4] OF LREAL := -3.3541, -12.8984, 57.1684, 16.7280;
 		
-		x : ARRAY[1..4] OF LREAL := 0,0,0,0;
-		xPre : ARRAY[1..4] OF LREAL := 0,0,0,0;
-		xn : ARRAY[1..4] OF LREAL := 0,0,0,0;
-		xn1 : ARRAY[1..4] OF LREAL := 0,0,0,0;
-		est : ARRAY[1..4] OF LREAL := 0,0,0,0;
+		u : LREAL := 0;
 		
-		temp : LREAL;
+		x : ARRAY[1..4] OF LREAL := 0,0,0,0;
+		xn : ARRAY[1..4] OF LREAL := 0,0,0,0;
+		
+		intOut : ARRAY[1..4] OF LREAL := 0,0,0,0;
+		intSave : ARRAY[1..4] OF LREAL := 0,0,0,0;
+		
+		mc : LREAL := 0.5;
+		mp : LREAL := 0.084;
 		Ts : LREAL := 0.01;
 	END_STRUCT;
 	

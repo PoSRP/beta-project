@@ -83,11 +83,9 @@ PROGRAM _CYCLIC
 	//////////////////////
 	// Update the current values through either pvi or opcua, based on button states
 	IF hmi.buttons.experiorSim THEN
-		// Updating experior simulated values for angle, position and velocity
-		control.currentAngularVelocity := (DINT_TO_REAL(pvi.pendulumAngle) - control.currentAngle) * 0.01 * 2 * 3.14159 / 1024.0;
+		
 		control.currentAngle := DINT_TO_REAL(pvi.pendulumAngle);
 		control.currentPosition := DINT_TO_REAL(pvi.cartPositionEncoder);
-		control.currentVelocity := DINT_TO_REAL(pvi.motor.velocity);
 		// Remap angle so that 0 is vertical and signed, in radians
 		control.currentAngle := (DINT_TO_REAL(pvi.pendulumAngle)) * 2 * 3.14159 / 1024.0;
 		IF control.currentAngle > 3.14159 THEN
@@ -134,13 +132,14 @@ PROGRAM _CYCLIC
 			//control.state := CTRL_HOME_START;
 			control.state := CTRL_RUNNING;
 			
-			lqr.est[1] := 0;
-			lqr.est[2] := 0;
-			lqr.est[3] := 0;
-			lqr.est[4] := 0;
-			lqr.x := lqr.est;
+			lqr.x[1] := 0;
+			lqr.x[2] := 0;
+			lqr.x[3] := 0;
+			lqr.x[4] := 0;
 			lqr.xn := lqr.x;
-			lqr.xn1 := lqr.xn;
+			lqr.intOut := lqr.x;
+			lqr.intSave := lqr.x;
+			lqr.u := 0;
 			
 		CTRL_HOME_START:
 			// There's only homing for Experior
@@ -228,76 +227,34 @@ PROGRAM _CYCLIC
 					// This is where the local control can be calculated
 					// The calculated velocity is set through control.setVelocity
 					
-					lqr.xPre := lqr.x;
-
 					lqr.x[1] := lqr.x[1] - control.setPosition;
 					//lqr.x[2];
 					lqr.x[3] := lqr.x[3] - control.setAngle;
 					//lqr.x[4]];
 
-					lqr.temp := lqr.Klqr[1] * lqr.x[1] + lqr.Klqr[2] * lqr.x[2] + lqr.Klqr[3] * lqr.x[3] + lqr.Klqr[4] * lqr.x[4];
-
-					lqr.x[1] := -lqr.B[1] * lqr.temp;
-					lqr.x[2] := -lqr.B[2] * lqr.temp;
-					lqr.x[3] := -lqr.B[3] * lqr.temp;
-					lqr.x[4] := -lqr.B[4] * lqr.temp;
-
-					lqr.est[1] := lqr.Kf[1,1] * (lqr.x[1] - control.currentPosition) - lqr.Kf[2,1] * (control.currentAngle - lqr.x[3]);
-					lqr.est[2] := lqr.Kf[1,2] * (lqr.x[1] - control.currentPosition) - lqr.Kf[2,2] * (control.currentAngle - lqr.x[3]);
-					lqr.est[3] := lqr.Kf[1,3] * (lqr.x[1] - control.currentPosition) - lqr.Kf[2,3] * (control.currentAngle - lqr.x[3]);
-					lqr.est[4] := lqr.Kf[1,4] * (lqr.x[1] - control.currentPosition) - lqr.Kf[2,4] * (control.currentAngle - lqr.x[3]);
-
-					lqr.x[1] := lqr.x[1] 
-					+ lqr.A[1,1] * lqr.xPre[1] 
-					+ lqr.A[2,1] * lqr.xPre[2] 
-					+ lqr.A[3,1] * lqr.xPre[3] 
-					+ lqr.A[4,1] * lqr.xPre[4] 
-					- lqr.Kf[2,1] * (control.currentAngle - lqr.x[3]) 
-					+ lqr.Kf[1,1] * (lqr.x[1] - control.currentPosition);
+					lqr.u := lqr.Klqr[1] * lqr.x[1] + lqr.Klqr[2] * lqr.x[2] + lqr.Klqr[3] * lqr.x[3] + lqr.Klqr[4] * lqr.x[4];
 					
-					lqr.x[2] := lqr.x[2] 
-					+ lqr.A[1,2] * lqr.xPre[1] 
-					+ lqr.A[2,2] * lqr.xPre[2] 
-					+ lqr.A[3,2] * lqr.xPre[3] 
-					+ lqr.A[4,2] * lqr.xPre[4] 
-					- lqr.Kf[2,2] * (control.currentAngle - lqr.x[3]) 
-					+ lqr.Kf[1,2] * (lqr.x[1] - control.currentPosition);
+					control.setVelocity := LREAL_TO_REAL(lqr.u * (1 / (lqr.mc + lqr.mp)) * lqr.Ts);
 					
-					lqr.x[3] := lqr.x[3] 
-					+ lqr.A[1,3] * lqr.xPre[1] 
-					+ lqr.A[2,3] * lqr.xPre[2] 
-					+ lqr.A[3,3] * lqr.xPre[3] 
-					+ lqr.A[4,3] * lqr.xPre[4] 
-					- lqr.Kf[2,3] * (control.currentAngle - lqr.x[3]) 
-					+ lqr.Kf[1,3] * (lqr.x[1] - control.currentPosition);
+					lqr.xn[1] := lqr.B[1] * lqr.u + lqr.A[1,1] * lqr.x[1] + lqr.A[1,2] * lqr.x[2] + lqr.A[1,3] * lqr.x[3] + lqr.A[1,4] * lqr.x[4] - lqr.Kf[1,2] * (control.currentAngle - lqr.x[3]) + lqr.Kf[1,1] * (lqr.x[1] - control.currentPosition);
+					lqr.xn[2] := lqr.B[2] * lqr.u + lqr.A[2,1] * lqr.x[1] + lqr.A[2,2] * lqr.x[2] + lqr.A[2,3] * lqr.x[3] + lqr.A[2,4] * lqr.x[4] - lqr.Kf[2,2] * (control.currentAngle - lqr.x[3]) + lqr.Kf[2,1] * (lqr.x[1] - control.currentPosition);
+					lqr.xn[3] := lqr.B[3] * lqr.u + lqr.A[3,1] * lqr.x[1] + lqr.A[3,2] * lqr.x[2] + lqr.A[3,3] * lqr.x[3] + lqr.A[3,4] * lqr.x[4] - lqr.Kf[3,2] * (control.currentAngle - lqr.x[3]) + lqr.Kf[3,1] * (lqr.x[1] - control.currentPosition);
+					lqr.xn[4] := lqr.B[4] * lqr.u + lqr.A[4,1] * lqr.x[1] + lqr.A[4,2] * lqr.x[2] + lqr.A[4,3] * lqr.x[3] + lqr.A[4,4] * lqr.x[4] - lqr.Kf[4,2] * (control.currentAngle - lqr.x[3]) + lqr.Kf[4,1] * (lqr.x[1] - control.currentPosition);
 					
-					lqr.x[4] := lqr.x[4] 
-					+ lqr.A[1,4] * lqr.xPre[1] 
-					+ lqr.A[2,4] * lqr.xPre[2] 
-					+ lqr.A[3,4] * lqr.xPre[3] 
-					+ lqr.A[4,4] * lqr.xPre[4] 
-					- lqr.Kf[2,4] * (control.currentAngle - lqr.x[3]) 
-					+ lqr.Kf[1,4] * (lqr.x[1] - control.currentPosition);
-
-					lqr.x[1] := lqr.x[1] * lqr.Ts / 2;
-					lqr.x[2] := lqr.x[2] * lqr.Ts / 2;
-					lqr.x[3] := lqr.x[3] * lqr.Ts / 2;
-					lqr.x[4] := lqr.x[4] * lqr.Ts / 2;
-
-					lqr.xn[1] := (lqr.xn1[1] + lqr.x[1]);
-					lqr.xn[2] := (lqr.xn1[2] + lqr.x[2]);
-					lqr.xn[3] := (lqr.xn1[3] + lqr.x[3]);
-					lqr.xn[4] := (lqr.xn1[4] + lqr.x[4]);
-
-					lqr.xn1[1] := lqr.x[1] + lqr.xn[1];
-					lqr.xn1[2] := lqr.x[2] + lqr.xn[2];
-					lqr.xn1[3] := lqr.x[3] + lqr.xn[3];
-					lqr.xn1[4] := lqr.x[4] + lqr.xn[4];
-
-					lqr.x := lqr.xn1;
-
-					// 8
-					control.setVelocity := LREAL_TO_REAL(lqr.x[2]) * 1000;
+					lqr.intOut[1] := (lqr.xn[1] * lqr.Ts/2) + lqr.intSave[1];
+					lqr.intOut[2] := (lqr.xn[2] * lqr.Ts/2) + lqr.intSave[2];
+					lqr.intOut[3] := (lqr.xn[3] * lqr.Ts/2) + lqr.intSave[3];
+					lqr.intOut[4] := (lqr.xn[4] * lqr.Ts/2) + lqr.intSave[4];
+					
+					lqr.intSave[1] := lqr.intOut[1] + (lqr.xn[1] * lqr.Ts / 2);
+					lqr.intSave[2] := lqr.intOut[2] + (lqr.xn[2] * lqr.Ts / 2);
+					lqr.intSave[3] := lqr.intOut[3] + (lqr.xn[3] * lqr.Ts / 2);
+					lqr.intSave[4] := lqr.intOut[4] + (lqr.xn[4] * lqr.Ts / 2);
+					
+					lqr.x[1] := lqr.intOut[1];
+					lqr.x[2] := lqr.intOut[2];
+					lqr.x[3] := lqr.intOut[3];
+					lqr.x[4] := lqr.intOut[4];
 		
 				ELSIF hmi.buttons.simulinkPid THEN
 					// Simulink has the calculated value for velocity
@@ -337,7 +294,13 @@ PROGRAM _CYCLIC
 		pvi.motor.forward := control.currentDirection;
 		
 		// Set the motor velocity from the control type
-		pvi.motor.setVelocity := REAL_TO_INT(control.setVelocity);
+		IF control.setVelocity > 0 AND control.setVelocity > control.limitVelocity THEN
+			pvi.motor.setVelocity := REAL_TO_INT(control.limitVelocity);
+		ELSIF control.setVelocity < 0 AND -control.setVelocity > control.limitVelocity THEN
+			pvi.motor.setVelocity := -REAL_TO_INT(control.limitVelocity);
+		ELSE
+			pvi.motor.setVelocity := REAL_TO_INT(control.setVelocity);
+		END_IF
 		
 	ELSIF hmi.buttons.simulinkSim THEN
 		// Write the calculated velocity to the opcua type
