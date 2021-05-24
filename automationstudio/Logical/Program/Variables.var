@@ -3,5 +3,5 @@ VAR
 	hmi : hmiType;
 	opcua : opcuaType;
 	pvi : pviType;
-	localPid : localPidType;
+	lqr : localLqrType;
 END_VAR

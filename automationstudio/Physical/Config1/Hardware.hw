@@ -10,9 +10,5 @@
     </Connector>
     <Parameter ID="ConfigurationID" Value="betaprojectAS_Config1" />
     <Parameter ID="Simulation" Value="1" />
-    <Parameter ID="ActivateOpcUa" Value="1" />
-    <Parameter ID="OpcUa_AuthenticationSecurityPolicy_EnableNone" Value="1" />
-    <Parameter ID="OpcUa_SamplingTimer_Default" Value="1" />
-    <Parameter ID="OpcUaInformationModels_PV_Version" Value="1" />
   </Module>
 </Hardware>
