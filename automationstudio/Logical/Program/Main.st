@@ -85,12 +85,14 @@ PROGRAM _CYCLIC
 	IF hmi.buttons.experiorSim THEN
 		
 		control.currentAngle := DINT_TO_REAL(pvi.pendulumAngle);
-		control.currentPosition := DINT_TO_REAL(pvi.cartPositionEncoder);
+		control.currentPosition := DINT_TO_REAL(pvi.cartPositionEncoder) / 1000;
 		// Remap angle so that 0 is vertical and signed, in radians
 		control.currentAngle := (DINT_TO_REAL(pvi.pendulumAngle)) * 2 * 3.14159 / 1024.0;
 		IF control.currentAngle > 3.14159 THEN
 			control.currentAngle := control.currentAngle - 2 * 3.14159;
 		END_IF
+		// Flip it
+		control.currentAngle := -control.currentAngle;
 		
 		// And direction, velocity is just signed
 		IF control.currentVelocity >= 0 THEN
@@ -227,19 +229,19 @@ PROGRAM _CYCLIC
 					// This is where the local control can be calculated
 					// The calculated velocity is set through control.setVelocity
 					
-					lqr.x[1] := lqr.x[1] - control.setPosition;
-					//lqr.x[2];
-					lqr.x[3] := lqr.x[3] - control.setAngle;
+					//lqr.x[1] := lqr.x[1] - control.setPosition;
+					//lqr.x[2];  
+					//lqr.x[3] := lqr.x[3] - control.setAngle;
 					//lqr.x[4]];
 
-					lqr.u := lqr.Klqr[1] * lqr.x[1] + lqr.Klqr[2] * lqr.x[2] + lqr.Klqr[3] * lqr.x[3] + lqr.Klqr[4] * lqr.x[4];
+					lqr.u := lqr.Klqr[1] * (lqr.x[1] - control.setPosition) + lqr.Klqr[2] * lqr.x[2] + lqr.Klqr[3] * (lqr.x[3] - control.setAngle) + lqr.Klqr[4] * lqr.x[4];
 					
-					control.setVelocity := LREAL_TO_REAL(lqr.u * (1 / (lqr.mc + lqr.mp)) * lqr.Ts);
+					control.setVelocity := LREAL_TO_REAL(lqr.u * (1 / (lqr.mc + lqr.mp)) * lqr.Ts) * 1000;
 					
-					lqr.xn[1] := lqr.B[1] * lqr.u + lqr.A[1,1] * lqr.x[1] + lqr.A[1,2] * lqr.x[2] + lqr.A[1,3] * lqr.x[3] + lqr.A[1,4] * lqr.x[4] - lqr.Kf[1,2] * (control.currentAngle - lqr.x[3]) + lqr.Kf[1,1] * (lqr.x[1] - control.currentPosition);
-					lqr.xn[2] := lqr.B[2] * lqr.u + lqr.A[2,1] * lqr.x[1] + lqr.A[2,2] * lqr.x[2] + lqr.A[2,3] * lqr.x[3] + lqr.A[2,4] * lqr.x[4] - lqr.Kf[2,2] * (control.currentAngle - lqr.x[3]) + lqr.Kf[2,1] * (lqr.x[1] - control.currentPosition);
-					lqr.xn[3] := lqr.B[3] * lqr.u + lqr.A[3,1] * lqr.x[1] + lqr.A[3,2] * lqr.x[2] + lqr.A[3,3] * lqr.x[3] + lqr.A[3,4] * lqr.x[4] - lqr.Kf[3,2] * (control.currentAngle - lqr.x[3]) + lqr.Kf[3,1] * (lqr.x[1] - control.currentPosition);
-					lqr.xn[4] := lqr.B[4] * lqr.u + lqr.A[4,1] * lqr.x[1] + lqr.A[4,2] * lqr.x[2] + lqr.A[4,3] * lqr.x[3] + lqr.A[4,4] * lqr.x[4] - lqr.Kf[4,2] * (control.currentAngle - lqr.x[3]) + lqr.Kf[4,1] * (lqr.x[1] - control.currentPosition);
+					lqr.xn[1] := lqr.B[1] * lqr.u + lqr.A[1,1] * lqr.x[1] + lqr.A[1,2] * lqr.x[2] + lqr.A[1,3] * lqr.x[3] + lqr.A[1,4] * lqr.x[4] + lqr.Kf[1,2] * (lqr.x[3] - control.currentAngle) + lqr.Kf[1,1] * (lqr.x[1] - control.currentPosition);
+					lqr.xn[2] := lqr.B[2] * lqr.u + lqr.A[2,1] * lqr.x[1] + lqr.A[2,2] * lqr.x[2] + lqr.A[2,3] * lqr.x[3] + lqr.A[2,4] * lqr.x[4] + lqr.Kf[2,2] * (lqr.x[3] - control.currentAngle) + lqr.Kf[2,1] * (lqr.x[1] - control.currentPosition);
+					lqr.xn[3] := lqr.B[3] * lqr.u + lqr.A[3,1] * lqr.x[1] + lqr.A[3,2] * lqr.x[2] + lqr.A[3,3] * lqr.x[3] + lqr.A[3,4] * lqr.x[4] + lqr.Kf[3,2] * (lqr.x[3] - control.currentAngle) + lqr.Kf[3,1] * (lqr.x[1] - control.currentPosition);
+					lqr.xn[4] := lqr.B[4] * lqr.u + lqr.A[4,1] * lqr.x[1] + lqr.A[4,2] * lqr.x[2] + lqr.A[4,3] * lqr.x[3] + lqr.A[4,4] * lqr.x[4] + lqr.Kf[4,2] * (lqr.x[3] - control.currentAngle) + lqr.Kf[4,1] * (lqr.x[1] - control.currentPosition);
 					
 					lqr.intOut[1] := (lqr.xn[1] * lqr.Ts/2) + lqr.intSave[1];
 					lqr.intOut[2] := (lqr.xn[2] * lqr.Ts/2) + lqr.intSave[2];
